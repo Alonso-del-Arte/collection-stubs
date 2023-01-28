@@ -18,7 +18,8 @@ class ArrayBackedSetTest {
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
         LocalDateTime dateTime = LocalDateTime.now();
         String msg = "Should be able to add " + dateTime + " to set of times";
-        assert set.add(dateTime) : msg;
+        boolean opResult = set.add(dateTime);
+        assert opResult : msg;
     }
 
     @Test

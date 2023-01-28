@@ -15,13 +15,13 @@ public class ArrayBackedSet<E> {
     }
 
     public boolean contains(E element) {
-        boolean flag = false;
+        boolean found = false;
         int index = 0;
-        while (!flag && index < this.nextUp) {
-            flag = element.equals(this.elements[index]);
+        while (!found && index < this.nextUp) {
+            found = element.equals(this.elements[index]);
             index++;
         }
-        return flag;
+        return found;
     }
 
     // TODO: Write test for this
