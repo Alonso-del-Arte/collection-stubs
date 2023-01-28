@@ -29,9 +29,8 @@ public class ArrayBackedSet<E> {
         return true;
     }
 
-    // TODO: Write test for this
     public int size() {
-        return -1;
+        return this.nextUp;
     }
 
     // TODO: Write test for this
