@@ -55,4 +55,15 @@ class ArrayBackedSetTest {
         assert !set.contains(futureTime) : msg;
     }
 
+    @Test
+    void testSize() {
+        int capacity = RANDOM.nextInt(16) + 4;
+        ArrayBackedSet<Integer> set = new ArrayBackedSet<>(capacity);
+        for (int expected = 0; expected < capacity; expected++) {
+            int actual = set.size();
+            assertEquals(expected, actual);
+            set.add(expected);
+        }
+    }
+
 }
