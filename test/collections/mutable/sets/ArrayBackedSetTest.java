@@ -105,4 +105,30 @@ class ArrayBackedSetTest {
         assert !opResult : msg;
     }
 
+    @Test
+    void testRemove() {
+        System.out.println("remove");
+        int capacity = RANDOM.nextInt(64) + 16;
+        ArrayBackedSet<Integer> set = new ArrayBackedSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            set.add(i);
+        }
+        int markedNumber = RANDOM.nextInt(capacity);
+        boolean opResult = set.remove(markedNumber);
+        String msg = "Should be able to remove " + markedNumber
+                + " from set containing numbers 0 to " + (capacity - 1);
+        assert opResult : msg;
+        assert !set.contains(markedNumber);
+        int expected = capacity - 1;
+        int actual = set.size();
+        assertEquals(expected, actual);
+        for (int j = 0; j < capacity; j++) {
+            if (j != markedNumber) {
+                String stillPresentMsg = "After removing " + markedNumber
+                        + ", set should still contain " + j;
+                assert set.contains(j) : stillPresentMsg;
+            }
+        }
+    }
+
 }
