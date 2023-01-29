@@ -38,9 +38,8 @@ public class ArrayBackedSet<E> {
         return found;
     }
 
-    // TODO: Write test for this
     public boolean remove(E element) {
-        return true;
+        return false;
     }
 
     public int size() {
