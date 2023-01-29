@@ -12,9 +12,7 @@ public class ArrayBackedSet<E> {
         int oldCapacity = this.elements.length;
         int greaterCapacity = 3 * oldCapacity / 2;
         Object[] replacementArray = new Object[greaterCapacity];
-        for (int i = 0; i < this.nextUp; i++) {
-            replacementArray[i] = this.elements[i];
-        }
+        System.arraycopy(this.elements, 0, replacementArray, 0, this.nextUp);
         this.elements = replacementArray;
     }
 
