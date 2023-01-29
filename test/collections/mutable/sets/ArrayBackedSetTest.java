@@ -78,4 +78,22 @@ class ArrayBackedSetTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testAddCanExpandCapacity() {
+        int capacity = RANDOM.nextInt(16) + 4;
+        ArrayBackedSet<BigInteger> set = new ArrayBackedSet<>(capacity);
+        BigInteger start = new BigInteger(84, RANDOM);
+        BigInteger stop = start.add(BigInteger.valueOf(capacity));
+        for (BigInteger n = start;
+             n.compareTo(stop) < 0;
+             n = n.add(BigInteger.ONE)) {
+            set.add(n);
+        }
+        String msg = "Set filled to initial capacity " + capacity
+                + " should expand for one more element";
+        assertDoesNotThrow(() -> {
+            set.add(stop);
+        }, msg);
+    }
+
 }
