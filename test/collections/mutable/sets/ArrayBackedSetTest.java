@@ -66,4 +66,16 @@ class ArrayBackedSetTest {
         }
     }
 
+    @Test
+    void testNoDuplicateElements() {
+        ArrayBackedSet<String> set = new ArrayBackedSet<>();
+        String msg = "Should not be able to add same element twice";
+        set.add(msg);
+        int expected = set.size();
+        boolean reAddFlag = set.add(msg);
+        assert !reAddFlag : msg;
+        int actual = set.size();
+        assertEquals(expected, actual);
+    }
+
 }
