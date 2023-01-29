@@ -8,9 +8,22 @@ public class ArrayBackedSet<E> {
 
     private Object[] elements;
 
+    private void expandCapacity() {
+        int oldCapacity = this.elements.length;
+        int greaterCapacity = 3 * oldCapacity / 2;
+        Object[] replacementArray = new Object[greaterCapacity];
+        for (int i = 0; i < this.nextUp; i++) {
+            replacementArray[i] = this.elements[i];
+        }
+        this.elements = replacementArray;
+    }
+
     public boolean add(E element) {
         if (this.contains(element)) {
             return false;
+        }
+        if (this.nextUp == this.elements.length) {
+            this.expandCapacity();
         }
         this.elements[this.nextUp] = element;
         this.nextUp++;
