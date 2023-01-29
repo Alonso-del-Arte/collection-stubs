@@ -9,6 +9,9 @@ public class ArrayBackedSet<E> {
     private Object[] elements;
 
     public boolean add(E element) {
+        if (this.contains(element)) {
+            return false;
+        }
         this.elements[this.nextUp] = element;
         this.nextUp++;
         return element != null;
