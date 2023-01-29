@@ -96,4 +96,13 @@ class ArrayBackedSetTest {
         }, msg);
     }
 
+    @Test
+    void testNoRemoveFromEmptySet() {
+        LocalDateTime time = LocalDateTime.now();
+        ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
+        boolean opResult = set.remove(time);
+        String msg = "Should not be able to remove " + time + " from empty set";
+        assert !opResult : msg;
+    }
+
 }
