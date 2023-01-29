@@ -28,17 +28,7 @@ public class ArrayBackedSet<E> {
         return element != null;
     }
 
-    public boolean contains(E element) {
-        boolean found = false;
-        int index = 0;
-        while (!found && index < this.nextUp) {
-            found = element.equals(this.elements[index]);
-            index++;
-        }
-        return found;
-    }
-
-    public boolean remove(E element) {
+    private int indexOf(E element) {
         boolean found = false;
         int index = 0;
         while (!found && index < this.nextUp) {
@@ -46,16 +36,26 @@ public class ArrayBackedSet<E> {
             index++;
         }
         if (found) {
-            index--;
+            return index - 1;
+        } else {
+            return -1;
+        }
+    }
+
+    public boolean contains(E element) {
+        return this.indexOf(element) > -1;
+    }
+
+    public boolean remove(E element) {
+        int index = this.indexOf(element);
+        if (index > -1) {
             int lastIndex = --this.nextUp;
-            if (index < lastIndex) {
-                this.elements[index] = this.elements[lastIndex];
-            }
-            this.elements[lastIndex] = null;
+            this.elements[index] = this.elements[lastIndex];
             return true;
         } else {
             return false;
-        }    }
+        }
+    }
 
     public int size() {
         return this.nextUp;
