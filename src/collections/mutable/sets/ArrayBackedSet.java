@@ -39,8 +39,23 @@ public class ArrayBackedSet<E> {
     }
 
     public boolean remove(E element) {
-        return false;
-    }
+        boolean found = false;
+        int index = 0;
+        while (!found && index < this.nextUp) {
+            found = element.equals(this.elements[index]);
+            index++;
+        }
+        if (found) {
+            index--;
+            int lastIndex = --this.nextUp;
+            if (index < lastIndex) {
+                this.elements[index] = this.elements[lastIndex];
+            }
+            this.elements[lastIndex] = null;
+            return true;
+        } else {
+            return false;
+        }    }
 
     public int size() {
         return this.nextUp;
