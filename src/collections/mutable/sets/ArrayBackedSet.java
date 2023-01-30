@@ -62,7 +62,7 @@ public class ArrayBackedSet<E> {
     }
 
     public boolean isEmpty() {
-        return true;
+        return this.nextUp == 0;
     }
 
     // TODO: Write test for this
