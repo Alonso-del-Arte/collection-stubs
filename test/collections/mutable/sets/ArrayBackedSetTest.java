@@ -1,6 +1,7 @@
 package collections.mutable.sets;
 
 import java.math.BigInteger;
+import java.sql.Clob;
 import java.sql.NClob;
 import java.time.LocalDateTime;
 
@@ -105,6 +106,8 @@ class ArrayBackedSetTest {
         assert !opResult : msg;
     }
 
+    // TODO: Rewind remove() to failing and break this test up into smaller
+    //  tests
     @Test
     void testRemove() {
         System.out.println("remove");
@@ -129,6 +132,14 @@ class ArrayBackedSetTest {
                 assert set.contains(j) : stillPresentMsg;
             }
         }
+    }
+
+    @Test
+    void testIsEmpty() {
+        System.out.println("isEmpty");
+        ArrayBackedSet<Clob> set = new ArrayBackedSet<>();
+        String msg = "Newly created set should be empty";
+        assert set.isEmpty() : msg;
     }
 
 }
