@@ -75,7 +75,11 @@ public class ArrayBackedSet<E> {
     }
 
     public ArrayBackedSet(int initialCapacity) {
-        // TODO: Check initialCapacity > 0
+        if (initialCapacity < 2) {
+            String excMsg = "Initial capacity should be at least 2, not "
+                    + initialCapacity;
+            throw new IllegalArgumentException(excMsg);
+        }
         this.elements = new Object[initialCapacity];
     }
 
