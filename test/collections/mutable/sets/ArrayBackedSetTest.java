@@ -151,4 +151,43 @@ class ArrayBackedSetTest {
         assert !set.isEmpty() : msg;
     }
 
+    @Test
+    void testConstructorRejectsInitialCapacityOne() {
+        int badCapacity = 1;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            ArrayBackedSet<Clob> set = new ArrayBackedSet<>(badCapacity);
+            System.out.println("Should not have been able to create " + set
+                    + " with initial capacity " + badCapacity);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsInitialCapacityZero() {
+        int badCapacity = 0;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            ArrayBackedSet<Clob> set = new ArrayBackedSet<>(badCapacity);
+            System.out.println("Should not have been able to create " + set
+                    + " with initial capacity " + badCapacity);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsInitialCapacityNegative() {
+        int badCapacity = -RANDOM.nextInt(8192) - 1;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            ArrayBackedSet<Clob> set = new ArrayBackedSet<>(badCapacity);
+            System.out.println("Should not have been able to create " + set
+                    + " with initial capacity " + badCapacity);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
