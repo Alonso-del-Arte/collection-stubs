@@ -142,4 +142,13 @@ class ArrayBackedSetTest {
         assert set.isEmpty() : msg;
     }
 
+    @Test
+    void testIsNotEmpty() {
+        ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
+        LocalDateTime now = LocalDateTime.now();
+        set.add(now);
+        String msg = "After adding " + now + " to set, it should not be empty";
+        assert !set.isEmpty() : msg;
+    }
+
 }
