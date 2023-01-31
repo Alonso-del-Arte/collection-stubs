@@ -170,6 +170,43 @@ class ArrayBackedSetTest {
     }
 
     @Test
+    void testReferentialEquality() {
+        ArrayBackedSet<NClob> set = new ArrayBackedSet<>();
+        assertEquals(set, set);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        ArrayBackedSet<NClob> set = new ArrayBackedSet<>();
+        assertNotEquals(set, null);
+    }
+
+    private Object provideDiffClassObj(Object obj) {
+        return obj;
+    }
+
+    @Test
+    void testNotEqualsDiffClass() {
+        ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
+        LocalDateTime now = LocalDateTime.now();
+        set.add(now);
+        assertNotEquals(set, this.provideDiffClassObj(now));
+    }
+
+    @Test
+    void testNotEqualsDiffSizeSet() {
+        int capacity = RANDOM.nextInt(64) + 16;
+        ArrayBackedSet<Integer> setA = new ArrayBackedSet<>(capacity);
+        ArrayBackedSet<Integer> setB = new ArrayBackedSet<>(capacity + 1);
+        for (int i = 0; i < capacity; i++) {
+            setA.add(i);
+            setB.add(i);
+        }
+        setB.add(capacity);
+        assertNotEquals(setA, setB);
+    }
+
+    @Test
     void testConstructorRejectsInitialCapacityOne() {
         int badCapacity = 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
