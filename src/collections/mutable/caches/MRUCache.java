@@ -1,4 +1,9 @@
 package collections.mutable.caches;
 
-public class MRUCache<N, V> extends RecencyCache<N, V> {
+public abstract class MRUCache<N, V> extends RecencyCache<N, V> {
+
+    MRUCache(int capacity) {
+        super(capacity);
+    }
+
 }
