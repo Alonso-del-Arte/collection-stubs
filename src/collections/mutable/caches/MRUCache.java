@@ -14,13 +14,6 @@ public abstract class MRUCache<N, V> extends RecencyCache<N, V> {
 
     public MRUCache(int capacity) {
         super(capacity);
-        if (capacity < Cache.MINIMUM_CAPACITY
-                || capacity > Cache.MAXIMUM_CAPACITY) {
-            String excMsg = "Specified capacity " + capacity
-                    + " is outside range " + Cache.MINIMUM_CAPACITY + " to "
-                    + Cache.MAXIMUM_CAPACITY;
-            throw new IllegalArgumentException(excMsg);
-        }
     }
 
 }
