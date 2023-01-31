@@ -67,6 +67,22 @@ class LRUCacheTest {
         assert !cache.has(pattern) : msg;
     }
 
+    @Test
+    void testValueEventuallyForgotten() {
+        LRUCacheImpl cache = new LRUCacheImpl(DEFAULT_SIZE);
+        String romanName = "^(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})"
+                + "(I[XV]|V?I{0,3})$";
+        Pattern romanValue = cache.retrieve(romanName);
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
+            assert cache.has(romanValue);
+            String fillerName = "^" + i + "*$";
+            cache.retrieve(fillerName);
+        }
+        String msg = "After filling in " + DEFAULT_SIZE
+                + " other values, Roman numerals pattern should be out";
+        assert !cache.has(romanValue) : msg;
+    }
+
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         int createCallCount = 0;
