@@ -18,14 +18,27 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
 
     @SuppressWarnings("unchecked")
     public V retrieve(N name) {
+        Object currName;
         V value;
-        if (this.nextUp > 0 && name.equals(this.names[0])) {
-            value = (V) this.values[0];
+        boolean notFound = true;
+        int index = 0;
+        while (notFound && index < this.nextUp) {
+            currName = this.names[index];
+            if (currName.equals(name)) {
+                notFound = false;
+            }
+            index++;
+        }
+        if (!notFound) {
+            value = (V) this.values[index - 1];
         } else {
             value = this.create(name);
-            this.names[0] = name;
-            this.values[0] = value;
+            this.names[this.nextUp] = name;
+            this.values[this.nextUp] = value;
             this.nextUp++;
+            if (this.nextUp == this.capacity) {
+                this.nextUp--;
+            }
         }
         return value;
     }
