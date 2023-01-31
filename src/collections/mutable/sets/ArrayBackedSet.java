@@ -65,9 +65,8 @@ public class ArrayBackedSet<E> {
         return this.nextUp == 0;
     }
 
-    // TODO: Write test for this
     public void clear() {
-        //
+        this.nextUp = 0;
     }
 
     public ArrayBackedSet() {
