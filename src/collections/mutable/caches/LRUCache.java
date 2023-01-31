@@ -32,7 +32,7 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
     @SuppressWarnings("unchecked")
     public V retrieve(N name) {
         V value;
-        int index = indexOf(name, this.names, this.nextUp);
+        int index = indexOf(name, this.names, this.capacity);
         if (index > -1) {
             value = (V) this.values[index];
         } else {
@@ -41,7 +41,7 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
             this.values[this.nextUp] = value;
             this.nextUp++;
             if (this.nextUp == this.capacity) {
-                this.nextUp--;
+                this.nextUp = 0;
             }
         }
         return value;
