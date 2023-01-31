@@ -69,8 +69,13 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
 
     public LRUCache(int capacity) {
         super(capacity);
-        // TODO: Throw exception if size < MINIMUM_CAPACITY
-        // TODO: Throw exception if size > MAXIMUM_CAPACITY
+        if (capacity < Cache.MINIMUM_CAPACITY
+                || capacity > Cache.MAXIMUM_CAPACITY) {
+            String excMsg = "Specified capacity " + capacity
+                    + " is outside range " + Cache.MINIMUM_CAPACITY + " to "
+                    + Cache.MAXIMUM_CAPACITY;
+            throw new IllegalArgumentException(excMsg);
+        }
         this.capacity = capacity;
         this.names = new Object[this.capacity];
         this.values = new Object[this.capacity];

@@ -17,13 +17,19 @@ public abstract class Cache<N, V> {
      */
     protected abstract V create(N name);
 
+    // TODO: Make concrete, write tests
     protected abstract boolean has(V value);
 
+    // TODO: Make concrete, write tests
     public abstract V retrieve(N name);
 
     Cache(int capacity) {
-        // TODO: Write tests for capacity (negative, zero, or positive but too
-        //  low)
+        if (capacity < MINIMUM_CAPACITY || capacity > MAXIMUM_CAPACITY) {
+            String excMsg = "Specified capacity " + capacity
+                    + " is outside range " + MINIMUM_CAPACITY + " to "
+                    + MAXIMUM_CAPACITY;
+            throw new IllegalArgumentException(excMsg);
+        }
     }
 
 }

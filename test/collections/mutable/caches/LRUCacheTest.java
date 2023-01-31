@@ -99,13 +99,74 @@ class LRUCacheTest {
         assert cache.has(expected) : msg;
     }
 
-    private static class LRUCacheImpl extends LRUCache<String, Pattern> {
+    @Test
+    void testConstructorRejectsNegativeCapacity() {
+        int badCapacity = -RANDOM.nextInt(256) - 1;
+        String msg = "Should not be able to create cache with capacity "
+                + badCapacity + " which is below MINIMUM_CAPACITY = "
+                + Cache.MINIMUM_CAPACITY;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            LRUCacheImpl badCache = new LRUCacheImpl(badCapacity);
+            System.out.println("Created " + badCache + " with capacity "
+                    + badCapacity);
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
 
-        int createCallCount = 0;
+    @Test
+    void testConstructorRejectsCapacityZero() {
+        int badCapacity = 0;
+        String msg = "Should not be able to create cache with capacity "
+                + badCapacity + " which is below MINIMUM_CAPACITY = "
+                + Cache.MINIMUM_CAPACITY;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            LRUCacheImpl badCache = new LRUCacheImpl(badCapacity);
+            System.out.println("Created " + badCache + " with capacity "
+                    + badCapacity);
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsLowCapacity() {
+        int badCapacity = RANDOM.nextInt(Cache.MINIMUM_CAPACITY);
+        String msg = "Should not be able to create cache with capacity "
+                + badCapacity + " which is below MINIMUM_CAPACITY = "
+                + Cache.MINIMUM_CAPACITY;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            LRUCacheImpl badCache = new LRUCacheImpl(badCapacity);
+            System.out.println("Created " + badCache + " with capacity "
+                    + badCapacity);
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsExcessiveCapacity() {
+        int badCapacity = Cache.MAXIMUM_CAPACITY + RANDOM.nextInt(256) + 1;
+        String msg = "Should not be able to create cache with capacity "
+                + badCapacity + " which is beyond MAXIMUM_CAPACITY = "
+                + Cache.MAXIMUM_CAPACITY;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            LRUCacheImpl badCache = new LRUCacheImpl(badCapacity);
+            System.out.println("Created " + badCache + " with capacity "
+                    + badCapacity);
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         @Override
         protected Pattern create(String name) {
-            this.createCallCount++;
             return Pattern.compile(name);
         }
 
