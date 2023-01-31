@@ -69,6 +69,16 @@ public class ArrayBackedSet<E> {
         this.nextUp = 0;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     public ArrayBackedSet() {
         this(DEFAULT_INITIAL_CAPACITY);
     }
