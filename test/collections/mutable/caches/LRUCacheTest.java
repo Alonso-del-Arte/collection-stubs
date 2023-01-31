@@ -57,6 +57,16 @@ class LRUCacheTest {
         assert cache.has(pattern) : msg;
     }
 
+    @Test
+    void testDoesNotHave() {
+        LRUCacheImpl cache = new LRUCacheImpl(DEFAULT_SIZE);
+        String numberName = "([-+]?\\d*)";
+        Pattern pattern = Pattern.compile(numberName);
+        String msg = "New cache should not have " + pattern
+                + " or any other value";
+        assert !cache.has(pattern) : msg;
+    }
+
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         int createCallCount = 0;
