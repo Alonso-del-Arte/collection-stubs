@@ -12,7 +12,7 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
     private int nextUp = 0;
 
     protected boolean has(V value) {
-        return true;
+        return indexOf(value, this.values, this.capacity) > -1;
     }
 
     private static int indexOf(Object obj, Object[] array, int endBound) {
