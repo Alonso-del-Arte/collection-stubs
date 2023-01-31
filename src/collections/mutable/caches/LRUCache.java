@@ -11,9 +11,8 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
 
     private int nextUp = 0;
 
-    // TODO: Write a test for this
     protected boolean has(V value) {
-        return false;
+        return true;
     }
 
     private static int indexOf(Object obj, Object[] array, int endBound) {
@@ -32,7 +31,6 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
 
     @SuppressWarnings("unchecked")
     public V retrieve(N name) {
-        Object currName;
         V value;
         int index = indexOf(name, this.names, this.nextUp);
         if (index > -1) {
