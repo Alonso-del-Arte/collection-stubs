@@ -83,13 +83,29 @@ class LRUCacheTest {
         assert !cache.has(romanValue) : msg;
     }
 
+    @Test
+    void testFrequentlyRetrievedStaysCached() {
+        LRUCacheImpl cache = new LRUCacheImpl(DEFAULT_SIZE);
+        String dollarAmountName = "\\$\\d*\\.\\d{2}";
+        Pattern expected = cache.retrieve(dollarAmountName);
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
+            Pattern actual = cache.retrieve(dollarAmountName);
+            assertEquals(expected, actual);
+            String fillerName = "^" + (i + 1) + "*$";
+            cache.retrieve(fillerName);
+        }
+        String msg = "Cache should still have " + expected.toString()
+                + " because it was retrieved repeatedly";
+        assert cache.has(expected) : msg;
+    }
+
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         int createCallCount = 0;
 
         @Override
         protected Pattern create(String name) {
-            createCallCount++;
+            this.createCallCount++;
             return Pattern.compile(name);
         }
 
