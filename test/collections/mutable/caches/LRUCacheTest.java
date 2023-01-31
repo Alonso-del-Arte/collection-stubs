@@ -43,11 +43,6 @@ class LRUCacheTest {
             return Pattern.compile(name);
         }
 
-        @Override
-        public Pattern retrieve(String name) {
-            return Pattern.compile("^[a-zA-Z0–9+_.-]+@[a-zA-Z0–9.-]+$");
-        }
-
         LRUCacheImpl(int capacity) {
             super(capacity);
         }
