@@ -1,13 +1,22 @@
 package collections.mutable.caches;
 
+/**
+ * Fixed-capacity least recently used (LRU) cache. Inspired by
+ * <code>sun.misc.LRUCache</code> as used in <code>java.util.Scanner</code> (JDK
+ * 8).
+ * @param <N> The name type for the cached values. Preferably a type that is
+ *           very easy to recalculate. For example, <code>String</code>.
+ * @param <V> The type of the cached values. Preferably a type with values that
+ *           are expensive enough to recalculate that caching improves
+ *           performance. For example, <code>java.util.regex.Pattern</code>.
+ * @author Alonso del Arte
+ */
 public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
 
     private final Object[] names;
     private final Object[] values;
 
     private final int capacity;
-
-    private final int lastIndex;
 
     private int nextUp = 0;
 
@@ -27,9 +36,7 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
 
     private static void moveToFront(Object[] objects, int position) {
         Object first = objects[position];
-        for (int i = position; i > 0; i--) {
-            objects[i] = objects[i - 1];
-        }
+        System.arraycopy(objects, 0, objects, 1, position);
         objects[0] = first;
     }
 
@@ -67,6 +74,6 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
         this.capacity = capacity;
         this.names = new Object[this.capacity];
         this.values = new Object[this.capacity];
-        this.lastIndex = this.capacity - 1;    }
+    }
 
 }
