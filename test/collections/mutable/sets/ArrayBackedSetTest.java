@@ -152,6 +152,24 @@ class ArrayBackedSetTest {
     }
 
     @Test
+    void testClear() {
+        System.out.println("clear");
+        int capacity = RANDOM.nextInt(64) + 16;
+        ArrayBackedSet<BigInteger> set = new ArrayBackedSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            BigInteger number = new BigInteger(64 + i, RANDOM);
+            set.add(number);
+        }
+        String preMsg = "Set with " + set.size()
+                + " elements should not be empty";
+        assert !set.isEmpty() : preMsg;
+        set.clear();
+        String msg = "After calling clear, set should be empty";
+        assert set.isEmpty() : msg;
+        assertEquals(0, set.size(), msg);
+    }
+
+    @Test
     void testConstructorRejectsInitialCapacityOne() {
         int badCapacity = 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
