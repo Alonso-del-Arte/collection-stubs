@@ -16,21 +16,27 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
         return false;
     }
 
+    private static int indexOf(Object obj, Object[] array, int endBound) {
+        boolean found = false;
+        int curr = 0;
+        while (!found && curr < endBound) {
+            found = obj.equals(array[curr]);
+            curr++;
+        }
+        if (found) {
+            return curr - 1;
+        } else {
+            return -1;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public V retrieve(N name) {
         Object currName;
         V value;
-        boolean notFound = true;
-        int index = 0;
-        while (notFound && index < this.nextUp) {
-            currName = this.names[index];
-            if (currName.equals(name)) {
-                notFound = false;
-            }
-            index++;
-        }
-        if (!notFound) {
-            value = (V) this.values[index - 1];
+        int index = indexOf(name, this.names, this.nextUp);
+        if (index > -1) {
+            value = (V) this.values[index];
         } else {
             value = this.create(name);
             this.names[this.nextUp] = name;
