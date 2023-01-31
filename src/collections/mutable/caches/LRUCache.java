@@ -11,10 +11,6 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
 
     private int nextUp = 0;
 
-    protected boolean has(V value) {
-        return indexOf(value, this.values, this.capacity) > -1;
-    }
-
     private static int indexOf(Object obj, Object[] array, int endBound) {
         boolean found = false;
         int curr = 0;
@@ -29,6 +25,18 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
         }
     }
 
+    private static void moveToFront(Object[] objects, int position) {
+        Object first = objects[position];
+        for (int i = position; i > 0; i--) {
+            objects[i] = objects[i - 1];
+        }
+        objects[0] = first;
+    }
+
+    protected boolean has(V value) {
+        return indexOf(value, this.values, this.capacity) > -1;
+    }
+
     @SuppressWarnings("unchecked")
     public V retrieve(N name) {
         V value;
@@ -39,10 +47,15 @@ public abstract class LRUCache<N, V> extends RecencyCache<N, V> {
             value = this.create(name);
             this.names[this.nextUp] = name;
             this.values[this.nextUp] = value;
+            index = this.nextUp;
             this.nextUp++;
             if (this.nextUp == this.capacity) {
-                this.nextUp = 0;
+                this.nextUp--;
             }
+        }
+        if (index > 0) {
+            moveToFront(this.names, index);
+            moveToFront(this.values, index);
         }
         return value;
     }
