@@ -5,7 +5,7 @@ import collections.mutable.ArrayBackedCollection;
 
 import java.util.Iterator;
 
-public class ArrayBackedList<E> extends ArrayBackedCollection<E>
+public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E>
         implements IntegerIndexedCollection<E>, Iterable<E> {
 
     // TODO: Write tests for this
@@ -35,7 +35,7 @@ public class ArrayBackedList<E> extends ArrayBackedCollection<E>
     // TODO: Write tests for this
     @Override
     public int indexOf(E element) {
-        return Integer.MAX_VALUE;
+        return 0;
     }
 
     // TODO: Write tests for this
