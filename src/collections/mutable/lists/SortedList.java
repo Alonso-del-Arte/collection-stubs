@@ -29,7 +29,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     // TODO: Write tests for this
     @Override
     public boolean add(E element) {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
