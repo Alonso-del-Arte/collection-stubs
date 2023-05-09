@@ -35,7 +35,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     // TODO: Write tests for this
     @Override
     public int indexOf(E element) {
-        return 0;
+        return -1;
     }
 
     // TODO: Write tests for this
