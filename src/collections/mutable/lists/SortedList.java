@@ -17,7 +17,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     // TODO: Write tests for this
     @Override
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
