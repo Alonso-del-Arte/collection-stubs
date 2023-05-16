@@ -56,4 +56,12 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
         };
     }
 
+    public SortedList() {
+        //
+    }
+
+    SortedList(E[] originalElements) {
+        //
+    }
+
 }
