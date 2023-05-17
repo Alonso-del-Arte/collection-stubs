@@ -60,7 +60,7 @@ class SortedListTest {
 
     @Test
     void testExhaustedIteratorThrowsException() {
-        int capacity = RANDOM.nextInt(8) + 2;
+        int capacity = RANDOM.nextInt(4) + 1;
         LocalDate[] dateArray = new LocalDate[capacity];
         LocalDate today = LocalDate.now();
         for (int i = 0; i < capacity; i++) {
@@ -81,7 +81,7 @@ class SortedListTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
-//    @Test
+    @Test
     void testConstructorSortsOriginalElements() {
         int capacity = 12;
         BigInteger[] numbers = new BigInteger[capacity];
