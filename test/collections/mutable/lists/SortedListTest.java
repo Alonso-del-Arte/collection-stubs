@@ -102,6 +102,19 @@ class SortedListTest {
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void testConstructorDoesNotChangeCallersArray() {
+        int capacity = 12;
+        BigInteger[] actual = new BigInteger[capacity];
+        for (int i = 0; i < capacity; i++) {
+            actual[i] = new BigInteger(72, RANDOM);
+        }
+        BigInteger[] expected = new BigInteger[capacity];
+        System.arraycopy(actual, 0, expected, 0, capacity);
+        SortedList<BigInteger> list = new SortedList<>(actual);
+        assertArrayEquals(expected, actual);
+    }
+
     private static final class WrappedInteger
             implements Comparable<WrappedInteger> {
 
