@@ -41,7 +41,6 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
         return -1;
     }
 
-    // TODO: Write tests for this
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
@@ -55,6 +54,14 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
 
             @Override
             public E next() {
+                if (this.index == SortedList.this.elements.length) {
+                    String elementWord = this.index == 1
+                            ? " element" : " elements";
+                    String excMsg
+                            = "This iterator has already given out all of "
+                            + this.index + elementWord;
+                    throw new NoSuchElementException(excMsg);
+                }
                 return SortedList.this.elements[index++];
             }
 
