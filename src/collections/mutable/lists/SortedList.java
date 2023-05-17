@@ -3,6 +3,7 @@ package collections.mutable.lists;
 import collections.IntegerIndexedCollection;
 import collections.mutable.ArrayBackedCollection;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -74,6 +75,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
 
     SortedList(E[] originalElements) {
         this.elements = originalElements;
+        Arrays.sort(this.elements);
     }
 
 }
