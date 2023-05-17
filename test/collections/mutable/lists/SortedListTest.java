@@ -4,7 +4,9 @@ import static collections.CollectionTest.RANDOM;
 
 import java.time.chrono.ChronoLocalDate;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,6 +34,26 @@ class SortedListTest {
         String msg = "Should have been able to add this message to the list";
         boolean opResult = list.add(msg);
         assert opResult : msg;
+    }
+
+    @Test
+    void testIterator() {
+        System.out.println("iterator");
+        int capacity = RANDOM.nextInt(16) + 64;
+        LocalDate[] oneDateSeveralTimes = new LocalDate[capacity];
+        LocalDate expected = LocalDate.now();
+        Arrays.fill(oneDateSeveralTimes, expected);
+        SortedList<ChronoLocalDate> list
+                = new SortedList<>(oneDateSeveralTimes);
+        Iterator<ChronoLocalDate> iterator = list.iterator();
+        int index = 0;
+        while (iterator.hasNext()) {
+            ChronoLocalDate actual = iterator.next();
+            assertEquals(expected, actual);
+            index++;
+        }
+        String msg = "Iterator should have given all " + capacity + " elements";
+        assertEquals(capacity, index, msg);
     }
 
     private static final class WrappedInteger
