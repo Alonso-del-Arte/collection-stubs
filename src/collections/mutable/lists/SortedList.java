@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E>
         implements IntegerIndexedCollection<E>, Iterable<E> {
 
-    private E[] elements;
+    private Object[] elements;
 
     // TODO: Write tests for this
     @Override
@@ -53,6 +53,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
                 return this.index < SortedList.this.elements.length;
             }
 
+            @SuppressWarnings("unchecked")
             @Override
             public E next() {
                 if (this.index == SortedList.this.elements.length) {
@@ -63,7 +64,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
                             + this.index + elementWord;
                     throw new NoSuchElementException(excMsg);
                 }
-                return SortedList.this.elements[index++];
+                return (E) SortedList.this.elements[index++];
             }
 
         };
@@ -74,7 +75,9 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     }
 
     SortedList(E[] originalElements) {
-        this.elements = originalElements;
+        this.elements = new Object[originalElements.length];
+        System.arraycopy(originalElements, 0, this.elements, 0,
+                originalElements.length);
         Arrays.sort(this.elements);
     }
 
