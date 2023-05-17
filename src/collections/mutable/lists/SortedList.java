@@ -4,9 +4,12 @@ import collections.IntegerIndexedCollection;
 import collections.mutable.ArrayBackedCollection;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E>
         implements IntegerIndexedCollection<E>, Iterable<E> {
+
+    private E[] elements;
 
     // TODO: Write tests for this
     @Override
@@ -43,14 +46,16 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     public Iterator<E> iterator() {
         return new Iterator<E>() {
 
+            private int index = 0;
+
             @Override
             public boolean hasNext() {
-                return false;
+                return this.index < SortedList.this.elements.length;
             }
 
             @Override
             public E next() {
-                return null;
+                return SortedList.this.elements[index++];
             }
 
         };
@@ -61,7 +66,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     }
 
     SortedList(E[] originalElements) {
-        //
+        this.elements = originalElements;
     }
 
 }
