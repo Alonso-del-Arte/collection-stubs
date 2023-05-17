@@ -2,11 +2,13 @@ package collections.mutable.lists;
 
 import static collections.CollectionTest.RANDOM;
 
+import java.math.BigInteger;
 import java.time.chrono.ChronoLocalDate;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,6 +56,50 @@ class SortedListTest {
         }
         String msg = "Iterator should have given all " + capacity + " elements";
         assertEquals(capacity, index, msg);
+    }
+
+    @Test
+    void testExhaustedIteratorThrowsException() {
+        int capacity = RANDOM.nextInt(8) + 2;
+        LocalDate[] dateArray = new LocalDate[capacity];
+        LocalDate today = LocalDate.now();
+        for (int i = 0; i < capacity; i++) {
+            dateArray[i] = today.minusDays(i);
+        }
+        SortedList<ChronoLocalDate> dates = new SortedList<>(dateArray);
+        Iterator<ChronoLocalDate> iterator = dates.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next().toString());
+        }
+        Throwable t = assertThrows(NoSuchElementException.class, () -> {
+            ChronoLocalDate badDate = iterator.next();
+            System.out.println("Somehow exhausted iterator gave element "
+                    + badDate.toString());
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+//    @Test
+    void testConstructorSortsOriginalElements() {
+        int capacity = 12;
+        BigInteger[] numbers = new BigInteger[capacity];
+        for (int i = 0; i < capacity; i++) {
+            numbers[i] = new BigInteger(72, RANDOM);
+        }
+        BigInteger[] expected = new BigInteger[capacity];
+        System.arraycopy(numbers, 0, expected, 0, capacity);
+        Arrays.sort(expected);
+        SortedList<BigInteger> list = new SortedList<>(numbers);
+        BigInteger[] actual = new BigInteger[capacity];
+        Iterator<BigInteger> iterator = list.iterator();
+        int index = 0;
+        while (iterator.hasNext()) {
+            actual[index] = iterator.next();
+            index++;
+        }
+        assertArrayEquals(expected, actual);
     }
 
     private static final class WrappedInteger
