@@ -158,6 +158,21 @@ class SortedListTest {
         }
     }
 
+    @Test
+    void testIndexOf() {
+        System.out.println("indexOf");
+        int capacity = RANDOM.nextInt(64) + 16;
+        Integer[] numbers = new Integer[capacity];
+        for (int i = 0; i < capacity; i++) {
+            numbers[i] = i;
+        }
+        SortedList<Integer> list = new SortedList<>(numbers);
+        for (int expected = 0; expected < capacity; expected++) {
+            int actual = list.indexOf(expected);
+            assertEquals(expected, actual);
+        }
+    }
+
     private static final class WrappedInteger
             implements Comparable<WrappedInteger> {
 
