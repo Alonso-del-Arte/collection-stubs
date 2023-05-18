@@ -36,13 +36,28 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
         return true;
     }
 
-    // TODO: Write tests for this
+    @SuppressWarnings("unchecked")
     @Override
     public int indexOf(E element) {
-        int index = 0;
-        while (!element.equals(this.get(index))
-                && this.elements.length > ++index);
-        return index < this.elements.length ? index : -1;
+        // TODO: Check element is not null
+        int rangeBegin = 0;
+        int rangeCenter = this.elements.length / 2;
+        int prevCenter = rangeCenter - 1;
+        int rangeEnd = this.elements.length;
+        while (rangeCenter != prevCenter) {
+            int comparison = element.compareTo((E) this.elements[rangeCenter]);
+            if (comparison == 0) {
+                return rangeCenter;
+            }
+            if (comparison < 0) {
+                rangeEnd = rangeCenter;
+            } else {
+                rangeBegin = rangeCenter;
+            }
+            prevCenter = rangeCenter;
+            rangeCenter = rangeBegin + ((rangeEnd - rangeCenter) / 2);
+        }
+        return -1;
     }
 
     // TODO: Write excessive positive index test
