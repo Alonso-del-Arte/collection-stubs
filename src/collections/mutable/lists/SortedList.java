@@ -42,14 +42,18 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
         return -1;
     }
 
-    // TODO: Write tests for this
+    // TODO: Write excessive positive index test
+    @SuppressWarnings("unchecked")
     @Override
     public E get(int index) {
         if (index < 0) {
             String excMsg = "Index " + index + " is not valid";
             throw new IndexOutOfBoundsException(excMsg);
         }
-        return null;
+        if (index >= this.elements.length) {
+            return null;
+        }
+        return (E) this.elements[index];
     }
 
     @Override
