@@ -173,6 +173,37 @@ class SortedListTest {
         }
     }
 
+    @Test
+    void testIndexOfIsEfficient() {
+        int capacity = 1024;
+        WrappedInteger[] numbers = new WrappedInteger[capacity];
+        for (int i = 0; i < capacity; i++) {
+            numbers[i] = new WrappedInteger(i);
+        }
+        SortedList<WrappedInteger> list = new SortedList<>(numbers);
+        WrappedInteger.equalsCallCount = 0;
+        WrappedInteger.compareToCallCount = 0;
+        int expected = capacity / 2 + RANDOM.nextInt(capacity / 8) + 1;
+        WrappedInteger element = new WrappedInteger(expected);
+        int actual = list.indexOf(element);
+        int callCount = WrappedInteger.equalsCallCount;
+        assertEquals(expected, actual);
+        int maximumAcceptableCalls = capacity / 4;
+        String msg = "indexOf() should've found element at index " + expected
+                + " out of " + capacity + " with fewer than "
+                + maximumAcceptableCalls + " equals() calls, it took "
+                + callCount + " calls";
+        System.out.println(msg);
+        assert callCount <= maximumAcceptableCalls : msg;
+        int compareToCallCount = WrappedInteger.compareToCallCount;
+        String compareMsg = "indexOf() should've found element at index "
+                + expected + " out of " + capacity + " with fewer than "
+                + maximumAcceptableCalls + " compareTo() calls, it took "
+                + compareToCallCount + " calls";
+        System.out.println(compareMsg);
+        assert compareToCallCount <= maximumAcceptableCalls : compareMsg;
+    }
+
     private static final class WrappedInteger
             implements Comparable<WrappedInteger> {
 
