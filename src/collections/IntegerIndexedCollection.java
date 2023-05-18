@@ -27,10 +27,13 @@ public interface IntegerIndexedCollection<E> {
     int indexOf(E element);
 
     /**
-     *
+     * Retrieves the element at the specified index.
      * @param index The index for the desired element. For example, 12.
      * @return The element at <code>index</code>. For example, in a list of the
-     * uppercase letters of the
+     * uppercase letters of the English alphabet sorted from 'A' to 'Z',
+     * <code>index</code> 12 would return 'M'.
+     * @throws IndexOutOfBoundsException If <code>index</code> is negative, or
+     * equal to or greater than the size of the collection.
      */
     E get(int index);
 
