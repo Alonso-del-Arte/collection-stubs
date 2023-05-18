@@ -39,7 +39,10 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     // TODO: Write tests for this
     @Override
     public int indexOf(E element) {
-        return -1;
+        int index = 0;
+        while (!element.equals(this.get(index))
+                && this.elements.length > ++index);
+        return index < this.elements.length ? index : -1;
     }
 
     // TODO: Write excessive positive index test
