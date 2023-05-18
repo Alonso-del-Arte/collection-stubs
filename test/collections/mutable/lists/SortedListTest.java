@@ -129,6 +129,22 @@ class SortedListTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testGet() {
+        System.out.println("get");
+        int capacity = RANDOM.nextInt(32) + 8;
+        BigInteger[] expected = new BigInteger[capacity];
+        for (int i = 0; i < capacity; i++) {
+            expected[i] = new BigInteger(72, RANDOM);
+        }
+        Arrays.sort(expected);
+        SortedList<BigInteger> list = new SortedList<>(expected);
+        for (int j = 0; j < capacity; j++) {
+            BigInteger actual = list.get(j);
+            assertEquals(expected[j], actual);
+        }
+    }
+
     private static final class WrappedInteger
             implements Comparable<WrappedInteger> {
 
