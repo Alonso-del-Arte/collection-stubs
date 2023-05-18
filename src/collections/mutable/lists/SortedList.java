@@ -39,7 +39,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     @Override
     public int indexOf(E element) {
         if (element == null) {
-            return 0;
+            throw new NullPointerException("Element must not be null");
         }
         return Arrays.binarySearch(this.elements, element);
     }
