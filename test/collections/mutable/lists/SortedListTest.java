@@ -159,6 +159,20 @@ class SortedListTest {
     }
 
     @Test
+    void testIndexOfForNullCausesException() {
+        int capacity = RANDOM.nextInt(64) + 16;
+        String[] words = {"Example", "Examples"};
+        SortedList<String> list = new SortedList<>(words);
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            int badIndex = list.indexOf(null);
+            System.out.println("Null said to be at index " + badIndex);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testIndexOf() {
         System.out.println("indexOf");
         int capacity = RANDOM.nextInt(64) + 16;
