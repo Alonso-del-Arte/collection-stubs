@@ -42,6 +42,12 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
         return -1;
     }
 
+    // TODO: Write tests for this
+    @Override
+    public E get(int index) {
+        return null;
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {

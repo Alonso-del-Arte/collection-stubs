@@ -26,4 +26,12 @@ public interface IntegerIndexedCollection<E> {
      */
     int indexOf(E element);
 
+    /**
+     *
+     * @param index The index for the desired element. For example, 12.
+     * @return The element at <code>index</code>. For example, in a list of the
+     * uppercase letters of the
+     */
+    E get(int index);
+
 }

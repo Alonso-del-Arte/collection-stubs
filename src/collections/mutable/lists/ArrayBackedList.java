@@ -40,6 +40,12 @@ public class ArrayBackedList<E> extends ArrayBackedCollection<E>
 
     // TODO: Write tests for this
     @Override
+    public E get(int index) {
+        return null;
+    }
+
+    // TODO: Write tests for this
+    @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
 
