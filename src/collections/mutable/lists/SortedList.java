@@ -39,7 +39,7 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
     // TODO: Write tests for this
     @Override
     public int indexOf(E element) {
-        return -1;
+        return Integer.MAX_VALUE;
     }
 
     // TODO: Write excessive positive index test

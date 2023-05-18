@@ -130,6 +130,19 @@ class SortedListTest {
     }
 
     @Test
+    void testNoIndexOfIfNotInList() {
+        int capacity = 20;
+        Integer[] evenNumbers = new Integer[capacity];
+        for (int i = 0; i < capacity; i++) {
+            evenNumbers[i] = 2 * i * RANDOM.nextInt();
+        }
+        SortedList<Integer> list = new SortedList<>(evenNumbers);
+        int oddNumber = 2 * RANDOM.nextInt() + 1;
+        String msg = "List of even numbers should not contain " + oddNumber;
+        assert list.indexOf(oddNumber) < 0 : msg;
+    }
+
+    @Test
     void testGet() {
         System.out.println("get");
         int capacity = RANDOM.nextInt(32) + 8;
