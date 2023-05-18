@@ -112,7 +112,9 @@ class SortedListTest {
         BigInteger[] expected = new BigInteger[capacity];
         System.arraycopy(actual, 0, expected, 0, capacity);
         SortedList<BigInteger> list = new SortedList<>(actual);
-        assertArrayEquals(expected, actual);
+        String msg = "List " + list + " should not have changed "
+                + Arrays.toString(expected);
+        assertArrayEquals(expected, actual, msg);
     }
 
     @Test
@@ -160,7 +162,6 @@ class SortedListTest {
 
     @Test
     void testIndexOfForNullCausesException() {
-        int capacity = RANDOM.nextInt(64) + 16;
         String[] words = {"Example", "Examples"};
         SortedList<String> list = new SortedList<>(words);
         Throwable t = assertThrows(NullPointerException.class, () -> {
