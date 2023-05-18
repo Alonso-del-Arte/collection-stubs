@@ -115,6 +115,20 @@ class SortedListTest {
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    void testGetRejectsNegativeIndex() {
+        int badIndex = -RANDOM.nextInt(1024) - 1;
+        SortedList<ChronoLocalDate> dates = new SortedList<>();
+        Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
+            ChronoLocalDate badDate = dates.get(badIndex);
+            System.out.println("Trying to access element at index " + badIndex
+                    + " somehow gave " + badDate.toString());
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
     private static final class WrappedInteger
             implements Comparable<WrappedInteger> {
 
