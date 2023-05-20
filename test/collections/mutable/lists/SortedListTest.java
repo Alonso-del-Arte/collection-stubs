@@ -220,7 +220,7 @@ class SortedListTest {
     }
 
     @Test
-    void testIndexOfForAbsentElementGivesInsertionKey() {
+    void testIndexOfForAbsentElementSuggestsInsertionPoint() {
         int capacity = RANDOM.nextInt(16) + 4;
         Integer[] evens = new Integer[capacity];
         for (int i = 0; i < capacity; i++) {
