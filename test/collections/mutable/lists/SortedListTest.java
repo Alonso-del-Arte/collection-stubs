@@ -219,6 +219,25 @@ class SortedListTest {
         assert compareToCallCount <= maximumAcceptableCalls : compareMsg;
     }
 
+    @Test
+    void testListCanExpandCapacityAndMaintainSort() {
+        int capacity = RANDOM.nextInt(16) + 4;
+        Integer[] numbers = new Integer[capacity];
+        for (int i = 0; i < capacity; i++) {
+            numbers[i] = 2 * RANDOM.nextInt();
+        }
+        SortedList<Integer> list = new SortedList<>(numbers);
+        int twiceCapacity = 2 * capacity;
+        Integer[] expected = new Integer[2 * twiceCapacity];
+        System.arraycopy(numbers, 0, expected, 0, capacity);
+        for (int j = capacity; j < twiceCapacity; j++) {
+            expected[j] = numbers[j - capacity] * RANDOM.nextInt() + 1;
+            list.add(expected[j]);
+        }
+        Arrays.sort(expected);
+        fail("FINISH WRITING TEST");
+    }
+
     private static final class WrappedInteger
             implements Comparable<WrappedInteger> {
 
