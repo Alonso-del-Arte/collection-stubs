@@ -41,7 +41,12 @@ public class SortedList<E extends Comparable<E>> extends ArrayBackedCollection<E
         if (element == null) {
             throw new NullPointerException("Element must not be null");
         }
-        return Arrays.binarySearch(this.elements, element);
+        int key = Arrays.binarySearch(this.elements, element);
+        if (key >= 0) {
+            return key;
+        } else {
+            return -1;
+        }
     }
 
     // TODO: Write excessive positive index test
