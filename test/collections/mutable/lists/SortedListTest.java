@@ -219,6 +219,22 @@ class SortedListTest {
         assert compareToCallCount <= maximumAcceptableCalls : compareMsg;
     }
 
+    @Test
+    void testIndexOfForAbsentElementGivesInsertionKey() {
+        int capacity = RANDOM.nextInt(16) + 4;
+        Integer[] evens = new Integer[capacity];
+        for (int i = 0; i < capacity; i++) {
+            evens[i] = 2 * RANDOM.nextInt();
+        }
+        SortedList<Integer> list = new SortedList<>(evens);
+        int odd = evens[1] + 2 * RANDOM.nextInt(65536) + 1;
+        int expected = Arrays.binarySearch(evens, odd);
+        int actual = list.indexOf(odd);
+        String msg = "Expecting indexOf for " + odd
+                + " in list of even numbers to be less than -1";
+        assertEquals(expected, actual, msg);
+    }
+
 //    @Test
     void testListCanExpandCapacityAndMaintainSort() {
         int capacity = RANDOM.nextInt(16) + 4;
