@@ -1,6 +1,6 @@
-I intend to open this project to Hacktoberfest 2023 contributors.
+I intend to open this project to Hacktoberfest 2024 contributors.
 
-# Guidelines for Hacktoberfest 2023 contributors
+# Guidelines for Hacktoberfest 2024 contributors
 
 * Java 8, JUnit 5. The only dependencies for this project are the Java 
  Development Kit (JDK) and JUnit Jupiter.
